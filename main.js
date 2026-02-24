@@ -4,6 +4,10 @@ const { exec } = require('child_process')
 const isDev = process.env.NODE_ENV === 'development' || !app.isPackaged
 
 function getMusicStatus() {
+  if (process.platform !== 'darwin') {
+    return Promise.resolve("Music status not supported on Windows");
+  }
+
   return new Promise((resolve) => {
     const appleScript = `
       -- 1. Check Spotify Desktop App
